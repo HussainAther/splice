@@ -1,0 +1,7 @@
+samplename	group	orig_filename
+gfp_kd_1	control	JM/jm52_rnaseq_kc_gfpkd.trim.fastq.hisat2.bam
+gfp_kd_2	control	JM/jm53_rnaseq_kc_gfpkd.trim.fastq.hisat2.bam
+gfp_kd_3	control	JM/jm54_rnaseq_kc_gfpkd.trim.fastq.hisat2.bam
+rump_kd_1	treatment	JM/jm49_rnaseq_kc_rumpkd.trim.fastq.hisat2.bam
+rump_kd_2	treatment	JM/jm50_rnaseq_kc_rumpkd.trim.fastq.hisat2.bam
+rump_kd_3	treatment	JM/jm51_rnaseq_kc_rumpkd.trim.fastq.hisat2.bam

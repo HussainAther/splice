@@ -1,0 +1,7 @@
+samplename	group	orig_filename
+shep_wt_1	control	DC/DC95_elav_1_S29_L006_R1_001.bam
+shep_wt_2	control	DC/DC96_elav_2_S21_L006_R1_001.bam
+shep_wt_3	control	DC/DC97_elav_3_S25_L006_R1_001.bam
+shep_kd_1	treatment	DC/DC104_elav_UUU_1_S32_L006_R1_001.bam
+shep_kd_2	treatment	DC/DC104_elav_UUU_2_S24_L006_R1_001.bam
+shep_kd_3	treatment	DC/DC104_elav_UUU_3_S28_L006_R1_001.bam

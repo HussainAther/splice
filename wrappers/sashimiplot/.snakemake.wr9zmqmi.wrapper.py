@@ -1,0 +1,15 @@
+
+######## Snakemake header ########
+import sys; sys.path.append("/data/Lei_student/Hussain/miniconda/envs/splice/lib/python3.5/site-packages"); import pickle; snakemake = pickle.loads(b'\x80\x03csnakemake.script\nSnakemake\nq\x00)\x81q\x01}q\x02(X\x06\x00\x00\x00configq\x03}q\x04X\x03\x00\x00\x00gtfq\x05X-\x00\x00\x00/data/Lei_student/Hussain/RNASeq/features.gtfq\x06sX\x07\x00\x00\x00threadsq\x07K\x01X\x05\x00\x00\x00inputq\x08csnakemake.io\nInputFiles\nq\t)\x81q\n(XT\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC104_elav_UUU_1_S32_L006_R1_001.bamq\x0bXT\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC105_elav_UUU_2_S24_L006_R1_001.bamq\x0cXT\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC106_elav_UUU_3_S28_L006_R1_001.bamq\rXU\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC95_elav_dicer_1_S29_L006_R1_001.bamq\x0eXU\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC96_elav_dicer_2_S21_L006_R1_001.bamq\x0fXU\x00\x00\x00/data/Lei_student/Hussain/RNASeq/markduplicates/DC97_elav_dicer_3_S25_L006_R1_001.bamq\x10XG\x00\x00\x00rmats_out/JM_old/MATS_output/fdr_bottom5/MXE.MATS.JunctionCountOnly.txtq\x11e}q\x12(X\x02\x00\x00\x00b1q\x13csnakemake.io\nNamedlist\nq\x14)\x81q\x15(h\x0bh\x0ch\re}q\x16X\x06\x00\x00\x00_namesq\x17}q\x18sbX\x02\x00\x00\x00b2q\x19h\x14)\x81q\x1a(h\x0eh\x0fh\x10e}q\x1bh\x17}q\x1csbh\x17}q\x1d(h\x13K\x00K\x03\x86q\x1eh\x19K\x03K\x06\x86q\x1fX\x05\x00\x00\x00rmatsq K\x06N\x86q!uh h\x11ubX\x06\x00\x00\x00paramsq"csnakemake.io\nParams\nq#)\x81q$X\x03\x00\x00\x00MXEq%a}q&(X\x03\x00\x00\x00as_q\'h%h\x17}q(h\'K\x00N\x86q)subX\t\x00\x00\x00resourcesq*csnakemake.io\nResources\nq+)\x81q,(K\x01K\x01e}q-(X\x06\x00\x00\x00_nodesq.K\x01X\x06\x00\x00\x00_coresq/K\x01h\x17}q0(h.K\x00N\x86q1h/K\x01N\x86q2uubX\x03\x00\x00\x00logq3csnakemake.io\nLog\nq4)\x81q5X\x10\x00\x00\x00logs/sashimiplotq6a}q7h\x17}q8sbX\x04\x00\x00\x00ruleq9X\x0b\x00\x00\x00sashimiplotq:X\t\x00\x00\x00wildcardsq;csnakemake.io\nWildcards\nq<)\x81q=(X\x0b\x00\x00\x00fdr_bottom5q>X\x11\x00\x00\x00JunctionCountOnlyq?X\t\x00\x00\x00rmats_outq@X\x06\x00\x00\x00JM_oldqAh%e}qB(X\x07\x00\x00\x00jc_typeqCh?h\x17}qD(X\x07\x00\x00\x00as_typeqEK\x04N\x86qFX\x04\x00\x00\x00rankqGK\x00N\x86qHX\x06\x00\x00\x00outdirqIK\x02N\x86qJX\t\x00\x00\x00scientistqKK\x03N\x86qLX\x07\x00\x00\x00jc_typeqMK\x01N\x86qNuX\x06\x00\x00\x00outdirqOh@X\x07\x00\x00\x00as_typeqPh%X\x04\x00\x00\x00rankqQh>X\t\x00\x00\x00scientistqRhAubX\x06\x00\x00\x00outputqScsnakemake.io\nOutputFiles\nqT)\x81qUX`\x00\x00\x00rmats_out/JM_old/Sashimi_plots/fdr_bottom5/MXE.MATS.JunctionCountOnly/Sashimi_plot/Sashimi_plot/qVa}qWh\x17}qXsbub.'); from snakemake.logging import logger; logger.printshellcmds = False
+######## Original script #########
+from snakemake import shell
+
+treatment = ",".join(snakemake.input.b1)
+
+control = ",".join(snakemake.input.b2)
+
+shell("python rmats2sashimiplot/src/rmats2sashimiplot/rmats2sashimiplot.py "
+      "--b1 {treatment} --b2 {control} "
+      "--l1 \"experiment\" --l2 \"control\" "
+      "-o {snakemake.output} -e {snakemake.input.rmats} "
+      "-t {snakemake.params.as_} &> {snakemake.log}")

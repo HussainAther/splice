@@ -1,0 +1,17 @@
+
+######## Snakemake header ########
+import sys; sys.path.append("/data/Lei_student/Hussain/miniconda/envs/splice/lib/python3.5/site-packages"); import pickle; snakemake = pickle.loads(b'\x80\x03csnakemake.script\nSnakemake\nq\x00)\x81q\x01}q\x02(X\x06\x00\x00\x00configq\x03}q\x04X\x03\x00\x00\x00gtfq\x05X-\x00\x00\x00/data/Lei_student/Hussain/RNASeq/features.gtfq\x06sX\t\x00\x00\x00wildcardsq\x07csnakemake.io\nWildcards\nq\x08)\x81q\t(X\x06\x00\x00\x00JM_oldq\nX\t\x00\x00\x00rmats_outq\x0bX\x1e\x00\x00\x00ReadsOnTargetAndJunctionCountsq\x0cX\x17\x00\x00\x00incleveldifference_top5q\rX\x03\x00\x00\x00MXEq\x0ee}q\x0f(X\x06\x00\x00\x00_namesq\x10}q\x11(X\t\x00\x00\x00scientistq\x12K\x00N\x86q\x13X\x06\x00\x00\x00outdirq\x14K\x01N\x86q\x15X\x07\x00\x00\x00jc_typeq\x16K\x02N\x86q\x17X\x04\x00\x00\x00rankq\x18K\x03N\x86q\x19X\x07\x00\x00\x00as_typeq\x1aK\x04N\x86q\x1buX\x06\x00\x00\x00outdirq\x1ch\x0bX\x07\x00\x00\x00jc_typeq\x1dh\x0cX\x07\x00\x00\x00as_typeq\x1eh\x0eX\t\x00\x00\x00scientistq\x1fh\nX\x04\x00\x00\x00rankq h\rubX\x03\x00\x00\x00logq!csnakemake.io\nLog\nq")\x81q#X\x10\x00\x00\x00logs/sashimiplotq$a}q%h\x10}q&sbX\x06\x00\x00\x00outputq\'csnakemake.io\nOutputFiles\nq()\x81q)(X_\x00\x00\x00rmats_out/JM_old/Sashimi_plots/incleveldifference_top5/MXE.MATS.ReadsOnTargetAndJunctionCounts/q*X\x7f\x00\x00\x00rmats_out/JM_old/Sashimi_plots/incleveldifference_top5/MXE.MATS.ReadsOnTargetAndJunctionCounts/Sashimi_index/MXE.event.list.txtq+Xl\x00\x00\x00rmats_out/JM_old/Sashimi_plots/incleveldifference_top5/MXE.MATS.ReadsOnTargetAndJunctionCounts/Sashimi_plot/q,e}q-(X\x03\x00\x00\x00dirq.h*h\x10}q/(h.K\x00N\x86q0X\x05\x00\x00\x00eventq1K\x01N\x86q2X\x06\x00\x00\x00subdirq3K\x02N\x86q4uh1h+h3h,ubX\t\x00\x00\x00resourcesq5csnakemake.io\nResources\nq6)\x81q7(K\x01K\x01e}q8(X\x06\x00\x00\x00_coresq9K\x01X\x06\x00\x00\x00_nodesq:K\x01h\x10}q;(h9K\x00N\x86q<h:K\x01N\x86q=uubX\x06\x00\x00\x00paramsq>csnakemake.io\nParams\nq?)\x81q@h\x0ea}qA(h\x10}qBX\x03\x00\x00\x00as_qCK\x00N\x86qDshCh\x0eubX\x05\x00\x00\x00inputqEcsnakemake.io\nInputFiles\nqF)\x81qG(X`\x00\x00\x00rmats_out/JM_old/MATS_output/incleveldifference_top5/MXE.MATS.ReadsOnTargetAndJunctionCounts.txtqHX0\x00\x00\x00JM2/jc73_rnaseq_kc_fhwrump.trim.fastq.hisat2.bamqIX0\x00\x00\x00JM2/jc74_rnaseq_kc_fhwrump.trim.fastq.hisat2.bamqJX0\x00\x00\x00JM2/jc75_rnaseq_kc_fhwrump.trim.fastq.hisat2.bamqKX1\x00\x00\x00JM2/jc76_rnaseq_kc_fhwempty.trim.fastq.hisat2.bamqLX1\x00\x00\x00JM2/jc77_rnaseq_kc_fhwempty.trim.fastq.hisat2.bamqMX1\x00\x00\x00JM2/jc78_rnaseq_kc_fhwempty.trim.fastq.hisat2.bamqNe}qO(X\x05\x00\x00\x00rmatsqPhHX\x02\x00\x00\x00b1qQcsnakemake.io\nNamedlist\nqR)\x81qS(hIhJhKe}qTh\x10}qUsbh\x10}qV(hPK\x00N\x86qWhQK\x01K\x04\x86qXX\x02\x00\x00\x00b2qYK\x04K\x07\x86qZuhYhR)\x81q[(hLhMhNe}q\\h\x10}q]sbubX\x04\x00\x00\x00ruleq^X\x0b\x00\x00\x00sashimiplotq_X\x07\x00\x00\x00threadsq`K\x01ub.'); from snakemake.logging import logger; logger.printshellcmds = False
+######## Original script #########
+from snakemake import shell
+
+treatment = ",".join(snakemake.input.b1)
+
+control = ",".join(snakemake.input.b2)
+
+shell("python rmats2sashimiplot/src/rmats2sashimiplot/rmats2sashimiplot.py "
+      "--b1 {treatment} --b2 {control} "
+      "--l1 \"experiment\" --l2 \"control\" "
+      "-o {snakemake.output.dir} -e {snakemake.input.rmats} "
+      "-t {snakemake.params.as_} &> {snakemake.log}")
+
+shell("touch {snakemake.output.event}")

@@ -1,0 +1,10 @@
+__default__:
+  prefix: "--time=0:10:00 --mem=4g --partition=norm"
+rmats:
+  prefix: "--time=0:10:00 --mem=16g --partition=norm"
+parse:
+  prefix: "--time=0:10:00 --mem=16g --partition=norm"
+sashimiplot:
+  prefix: "--time=0:10:00 --mem=16g --partition=norm"
+pdfunite:
+  prefix: "--time=0:10:00 --mem=16g --partition=norm"

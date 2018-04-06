@@ -1,0 +1,7 @@
+samplename	group	orig_filename
+fhwempty_1	control	JM2/jm76_rnaseq_kc_fhwempty.trim.fastq.hisat2.bam
+fhwempty_2	control	JM2/jm77_rnaseq_kc_fhwempty.trim.fastq.hisat2.bam
+fhwempty_3	control	JM2/jm78_rnaseq_kc_fhwempty.trim.fastq.hisat2.bam
+fhwrump_1	treatment	JM2/jm73_rnaseq_kc_fhwrump.trim.fastq.hisat2.bam
+fhwrump_2	treatment	JM2/jm74_rnaseq_kc_fhwrump.trim.fastq.hisat2.bam
+fhwrump_3	treatment	JM2/jm75_rnaseq_kc_fhwrump.trim.fastq.hisat2.bam
