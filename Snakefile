@@ -36,7 +36,7 @@ bed12 = expand("rmats_out/{sample}/{as_type}.MATS.{jc_type}.bed",
 rule all:
     input: sashimi + bed12 
 
-ruleorder: preparse > parse
+ruleorder: rmats > preparse > parse > sashimiplot 
 
 rule rmats:
     input:
@@ -44,7 +44,7 @@ rule rmats:
         b1 = get_treatment_bams(),
         b2 = get_control_bams(),
     output:
-        expand("rmats_out/{sample}/summary.txt", sample = get_sample())
+        "rmats_out/MATS_output/summary.txt", 
     params:
         length = 101,
         reading = "single"
@@ -55,33 +55,33 @@ rule rmats:
 
 rule preparse:
 	input: 
-		"rmats_out/{sample}/summary.txt",
+		"rmats_out/MATS_output/summary.txt",
 	output:
-		"rmats_out/{sample}/{as_type}.MATS.{jc_type}.txt",
+		"rmats_out/{as_type}.MATS.{jc_type}.txt",
 	wrapper:
 		"file:wrappers/preparse"
 
 rule parse:
     input:
-        "rmats_out/{sample}/{as_type}.MATS.{jc_type}.txt",
+        "rmats_out/{as_type}.MATS.{jc_type}.txt",
     output:
-        pvalue_bottom5 = "rmats_out/{sample}/pvalue_bottom5/{as_type}.MATS.{jc_type}.txt",
-        fdr_bottom5 = "rmats_out/{sample}/fdr_bottom5/{as_type}.MATS.{jc_type}.txt",
-        incleveldifference_bottom5 = "rmats_out/{sample}/incleveldifference_bottom5/{as_type}.MATS.{jc_type}.txt",
-        incleveldifference_top5 = "rmats_out/{sample}/incleveldifference_top5/{as_type}.MATS.{jc_type}.txt",
+        pvalue_bottom5 = "rmats_out/pvalue_bottom5/{as_type}.MATS.{jc_type}.txt",
+        fdr_bottom5 = "rmats_out/fdr_bottom5/{as_type}.MATS.{jc_type}.txt",
+        incleveldifference_bottom5 = "rmats_out/incleveldifference_bottom5/{as_type}.MATS.{jc_type}.txt",
+        incleveldifference_top5 = "rmats_out/incleveldifference_top5/{as_type}.MATS.{jc_type}.txt",
     wrapper:
         "file:wrappers/parse"
 
 rule sashimiplot:
     input: 
-        rmats = expand("rmats_out/{sample}/{as_type}.MATS.{jc_type}.txt",sample=get_sample(), jc_type=jc_type, as_type=as_type),
+        rmats = "rmats_out/{as_type}.MATS.{jc_type}.txt",
         b1 = get_treatment_bams(),
         b2 = get_control_bams()
     output:
-        event = expand("rmats_out/{sample}/{rank}/{as_type}.MATS.{jc_type}/Sashimi_index/{as_type}.event.list.txt", rank=rank, sample=get_sample(), jc_type=jc_type, as_type=as_type)
+        event = "rmats_out/{rank}/{as_type}.MATS.{jc_type}/Sashimi_index/{as_type}.event.list.txt",
     params:
-        dir = expand("rmats_out/{sample}/{rank}/{as_type}.MATS.{jc_type}/",sample=get_sample(), rank=rank, as_type=as_type, jc_type=jc_type),
-        as_ =  expand("{as_type}",as_type=as_type)
+        dir = "rmats_out/{rank}/{as_type}.MATS.{jc_type}/",
+        as_ =  "{as_type}"
 #    log:
 #        "logs/sashimiplot/{sample}/{rank}/{as_type}/{jc_type}"
     wrapper:
@@ -89,11 +89,11 @@ rule sashimiplot:
 
 rule pdfunite:
 	input:
-		"rmats_out/{sample}/{rank}/{as_type}.MATS.{jc_type}/Sashimi_index/{as_type}.event.list.txt",
+		"rmats_out/{rank}/{as_type}.MATS.{jc_type}/Sashimi_index/{as_type}.event.list.txt",
 	output: 
-		"rmats_out/{sample}/{rank}/{as_type}.MATS.{jc_type}/Sashimi_plot/combined.pdf",
+		"rmats_out/{rank}/{as_type}.MATS.{jc_type}/Sashimi_plot/combined.pdf",
 	params:
-		"rmats_out/{sample}/{rank}/{as_type}.MATS.{jc_type}/Sashimi_plot/",
+		"rmats_out/{rank}/{as_type}.MATS.{jc_type}/Sashimi_plot/",
 	wrapper:
 		"file:wrappers/pdfunite"
 
@@ -101,8 +101,8 @@ rule convert_to_bed12:
     """
     For each output combination from rMATS, convert the events file to bed12 format
     """
-    input: "rmats_out/{sample}/{as_type}.MATS.{jc_type}.txt"
-    output: "rmats_out/{sample}/{as_type}.MATS.{jc_type}.bed"
+    input: "rmats_out/{as_type}.MATS.{jc_type}.txt"
+    output: "rmats_out/{as_type}.MATS.{jc_type}.bed"
     wrapper: "file:wrappers/convert_to_bed12"
 
 
