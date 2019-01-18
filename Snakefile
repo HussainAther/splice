@@ -78,7 +78,7 @@ rule sashimiplot:
         dir = "rmats_out/Sashimi_plots/{rank}/{as_type}.MATS.{jc_type}/",
         as_ =  "{as_type}",
     log:
-        "logs/sashimiplot_{rank}_{as_type}_{jc_type}"
+        "logs/sashimiplot/{rank}/{as_type}/{jc_type}"
     wrapper:
         "file:wrappers/sashimiplot"
 
@@ -90,7 +90,7 @@ rule pdfunite:
 	params:
 		"rmats_out/Sashimi_plots/{rank}/{as_type}.MATS.{jc_type}/Sashimi_plot/",
 	shell:
-		"pdfunite {params}* {output} &> {log}"
+		"pdfunite {params}* {output}"
 
 rule convert_to_bed12:
     """
