@@ -9,4 +9,5 @@ shell("python2.7 rMATS.3.2.5/RNASeq-MATS.py "
     "-t {snakemake.params.reading} "
     "-len {snakemake.params.length} "
     "-gtf {snakemake.input.gtf} "
-    "-o rmats_out &> {snakemake.log}")
+    "-o rmats_out")
+
